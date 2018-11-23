@@ -1,0 +1,16 @@
+ <div>
+        <input type="radio" id="mobility-0" name="point" value="0" checked>
+        <label for="mobility-0">0 points</label>
+    </div>
+    <div>
+        <input type="radio" id="mobility-1" name="point" value="1">
+        <label for="mobility-1">1 point</label>
+    </div>
+    <div>
+        <input type="radio" id="mobility-2" name="point" value="2">
+        <label for="mobility-2">2 points</label>
+    </div>
+    <div>
+        <input type="radio" id="mobility-3" name="point" value="3">
+        <label for="mobility-3">3 points</label>
+    </div>
