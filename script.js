@@ -11,7 +11,7 @@ var debug = true;
 function loadPatientData() {
     $.ajax({
         type: "GET",
-        url: "/api/patient/1",
+        url: "",
         dataType: "text",
         success: function(patientDATA){
 
@@ -39,7 +39,7 @@ function loadPatientData() {
             //Fill keyword list
             var html = "";
             patient.keywords.forEach(function(k) {
-                html += "<li onclick='loadKeyValue(k.key)'>"+k.key+"</li>";
+                html += "<li class=\"list-group-item list-group-item-action\" onclick='loadKeyValue(k.key)'>"+k.key+"</li>";
             });
             document.getElementById("keyword-list").innerHTML = html;
 
@@ -51,6 +51,6 @@ function loadPatientData() {
 }
 
 function loadKeyValue(key) {
-
+    //TODO
 }
 
