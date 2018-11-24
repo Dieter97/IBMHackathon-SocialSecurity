@@ -19,7 +19,7 @@ function loadPatientData() {
     toggleLoader();
     $.ajax({
         type: "GET",
-        url: server+"/api/patient/9",
+        url: server+"/api/patient/",
         dataType: "text",
         success: function(patientDATA){
 
