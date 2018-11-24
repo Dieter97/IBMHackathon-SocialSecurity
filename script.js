@@ -16,15 +16,98 @@ function loadPatientData() {
         success: function(patientDATA){
 
             if(debug){
-                patientDATA = "{\"id\":\"26\",\"patient_info\":{\"id\":\"26\",\"first_name\":\"Kirsten\",\"last_name\":\"Schuermans\",\"birthdate\":\"1988-08-25\",\"sex\":\"female\"},\"demand\":\"parking license\",\"pathologies\":[\"Ziekte van Alzheimer\"],\"keywords\":{\"prothese\":[{\"data_type\":\"text\",\"value\":\"2007: Totale heupprothese links\"}],\"hypoxie\":[{\"data_type\":\"text\",\"value\":\"COPD GOLD III met emfyseem en bronchiëctasieën; reeds nachtelijke hypoxie in 2012 maar blijvende nicotine-abusus.\"}],\"atelectase\":[{\"data_type\":\"text\",\"value\":\"Eind 2015 consultatie toegenomen hoesten en ook vermagering; CT thorax wat atelectase rechter MK.\"}],\"exacerbatie\":[{\"data_type\":\"text\",\"value\":\"11-2016 COPD exacerbatie, sputumkweek: Moraxella en Haemofilus Influenzae\\nR/ Augmentin\"}],\"pleuritis\":[{\"data_type\":\"text\",\"value\":\"Licht afgestompte longsinussen : sequelen pleuritis of lichtgradige hoeveelheid pleuravocht.\"}]}}";
+                patientDATA = "{\n" +
+                    "  \"id\": \"26\",\n" +
+                    "  \"patient_info\": {\n" +
+                    "    \"id\": \"26\",\n" +
+                    "    \"first_name\": \"Kirsten\",\n" +
+                    "    \"last_name\": \"Schuermans\",\n" +
+                    "    \"birthdate\": \"1988-08-25\",\n" +
+                    "    \"sex\": \"female\"\n" +
+                    "  },\n" +
+                    "  \"demand\": \"Parking license\",\n" +
+                    "  \"pathologies\": [\n" +
+                    "    \"Ziekte van Alzheimer\"\n" +
+                    "  ],\n" +
+                    "  \"keywords\": {\n" +
+                    "    \"prothese\": [\n" +
+                    "      {\n" +
+                    "        \"data_type\": \"text\",\n" +
+                    "        \"value\": \"2007: Totale heupprothese links\"\n" +
+                    "      },\n" +
+                    "      {\n" +
+                    "        \"data_type\": \"text\",\n" +
+                    "        \"value\": \"2008: Totale heupprothese rechts\"\n" +
+                    "      }\n" +
+                    "    ],\n" +
+                    "    \"hypoxie\": [\n" +
+                    "      {\n" +
+                    "        \"data_type\": \"text\",\n" +
+                    "        \"value\": \"COPD GOLD III met emfyseem en bronchiëctasieën; reeds nachtelijke hypoxie in 2012 maar blijvende nicotine-abusus.\"\n" +
+                    "      }\n" +
+                    "    ],\n" +
+                    "    \"atelectase\": [\n" +
+                    "      {\n" +
+                    "        \"data_type\": \"text\",\n" +
+                    "        \"value\": \"Eind 2015 consultatie toegenomen hoesten en ook vermagering; CT thorax wat atelectase rechter MK.\"\n" +
+                    "      }\n" +
+                    "    ],\n" +
+                    "    \"exacerbatie\": [\n" +
+                    "      {\n" +
+                    "        \"data_type\": \"text\",\n" +
+                    "        \"value\": \"11-2016 COPD exacerbatie, sputumkweek: Moraxella en Haemofilus Influenzae\\nR/ Augmentin\"\n" +
+                    "      }\n" +
+                    "    ],\n" +
+                    "    \"pleuritis\": [\n" +
+                    "      {\n" +
+                    "        \"data_type\": \"text\",\n" +
+                    "        \"value\": \"Licht afgestompte longsinussen : sequelen pleuritis of lichtgradige hoeveelheid pleuravocht.\"\n" +
+                    "      }\n" +
+                    "    ],\n" +
+                    "    \"Key 1\": [\n" +
+                    "      {\n" +
+                    "        \"data_type\": \"text\",\n" +
+                    "        \"value\": \"2007: Totale heupprothese links\"\n" +
+                    "      },\n" +
+                    "      {\n" +
+                    "        \"data_type\": \"text\",\n" +
+                    "        \"value\": \"2008: Totale heupprothese rechts\"\n" +
+                    "      }\n" +
+                    "    ],\n" +
+                    "    \"Key 2\": [\n" +
+                    "      {\n" +
+                    "        \"data_type\": \"text\",\n" +
+                    "        \"value\": \"COPD GOLD III met emfyseem en bronchiëctasieën; reeds nachtelijke hypoxie in 2012 maar blijvende nicotine-abusus.\"\n" +
+                    "      }\n" +
+                    "    ],\n" +
+                    "    \"Key 3\": [\n" +
+                    "      {\n" +
+                    "        \"data_type\": \"text\",\n" +
+                    "        \"value\": \"Eind 2015 consultatie toegenomen hoesten en ook vermagering; CT thorax wat atelectase rechter MK.\"\n" +
+                    "      }\n" +
+                    "    ],\n" +
+                    "    \"Key 4\": [\n" +
+                    "      {\n" +
+                    "        \"data_type\": \"text\",\n" +
+                    "        \"value\": \"11-2016 COPD exacerbatie, sputumkweek: Moraxella en Haemofilus Influenzae\\nR/ Augmentin\"\n" +
+                    "      }\n" +
+                    "    ],\n" +
+                    "    \"Key 5\": [\n" +
+                    "      {\n" +
+                    "        \"data_type\": \"text\",\n" +
+                    "        \"value\": \"Licht afgestompte longsinussen : sequelen pleuritis of lichtgradige hoeveelheid pleuravocht.\"\n" +
+                    "      }\n" +
+                    "    ]\n" +
+                    "  }\n" +
+                    "}";
             }
             patient = JSON.parse(patientDATA);
 
             //Set patient data on page
             document.getElementById("patient-name").innerText = patient.patient_info.first_name + " " + patient.patient_info.last_name;
-            document.getElementById("patient-birth").innerText = patient.patient_info.birthdate;
-            document.getElementById("patient-gender").innerText = patient.patient_info.sex;
-            document.getElementById("patient-profession").innerText = patient.patient_info.job;
+            document.getElementById("patient-birth").innerHTML = "<b>Birthday: </b>"+patient.patient_info.birthdate;
+            document.getElementById("patient-gender").innerHTML = "<b>Sex: </b>"+patient.patient_info.sex;
+            document.getElementById("patient-profession").innerHTML = "<b>Profession: </b>"+patient.patient_info.job;
 
             //Set demand
             document.getElementById("demand").innerText = patient.demand;
@@ -52,7 +135,6 @@ function loadPatientData() {
 }
 
 function loadKeyValue(key) {
-    //TODO
     console.log("test");
     var html = "";
     var keys = new Map(Object.entries(patient.keywords));
@@ -69,5 +151,24 @@ function loadKeyValue(key) {
         }
     }
     document.getElementById("content").innerHTML = html;
+}
+
+function filterKeywords() {
+    // Declare variables
+    var input, filter, ul, li, a, i;
+    input = document.getElementById('keyword-search');
+    filter = input.value.toUpperCase();
+    ul = document.getElementById("keyword-list");
+    li = ul.getElementsByTagName('li');
+
+    // Loop through all list items, and hide those who don't match the search query
+    for (i = 0; i < li.length; i++) {
+        a = li[i];
+        if (a.innerHTML.toUpperCase().indexOf(filter) > -1) {
+            li[i].style.display = "";
+        } else {
+            li[i].style.display = "none";
+        }
+    }
 }
 
