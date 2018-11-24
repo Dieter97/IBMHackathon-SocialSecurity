@@ -1,0 +1,83 @@
+
+body, html{
+    max-height: 100vh;
+}
+
+#sidebar-data{
+    background-color: rgba(122,122,122,0.31);
+    height: 100vh;
+}
+
+.nopul {
+    padding: 0;
+    list-style-type: none;
+}
+
+.icon-color {
+	color: white;
+}
+
+.sidebar{
+    border-right: 1px solid black;
+}
+
+.btm-border{
+    border-bottom: 1px solid black;
+}
+
+#patient-data{
+    border-bottom: 1px solid black;
+}
+
+#more-info-button:hover{
+    cursor: pointer;
+    opacity: 0.5;
+}
+
+#logout:hover{
+    cursor: pointer;
+    opacity: 0.5;
+}
+
+.hidden{
+    display: none;
+}
+
+
+
+/*LOADER*/
+.lds-hourglass {
+    position: absolute;
+    top: 50%;
+    left: 47.5%;
+    transform: translate(-50%,-50%);
+    transform: scale(2);
+    display: inline-block;
+    width: 64px;
+    height: 64px;
+}
+.lds-hourglass:after {
+    content: " ";
+    display: block;
+    border-radius: 50%;
+    width: 0;
+    height: 0;
+    margin: 6px;
+    box-sizing: border-box;
+    border: 26px solid;
+    border-color: rgba(18,18,18,0.66) transparent rgba(18,18,18,0.66) transparent;
+    animation: lds-hourglass 1.2s infinite;
+}
+@keyframes lds-hourglass {
+    0% {
+        transform: rotate(0);
+        animation-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);
+    }
+    50% {
+        transform: rotate(900deg);
+        animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+    }
+    100% {
+        transform: rotate(1800deg);
+    }
+}

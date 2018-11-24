@@ -3,10 +3,20 @@ $(document).ready(function() {
 
     //First load the patient data
     loadPatientData();
+
+
+
+    //Show page content and remove loader
+    setTimeout(function(){toggleLoader();},2000);
 });
 
 var patient;
 var debug = true;
+
+function toggleLoader() {
+    document.getElementById("loader").classList.toggle("hidden");
+    document.getElementById("wrapper").classList.toggle("hidden");
+}
 
 function loadPatientData() {
     $.ajax({
@@ -135,7 +145,7 @@ function loadPatientData() {
 }
 
 function loadKeyValue(key) {
-    console.log("test");
+    //TODO LOG the click to the backend
     var html = "";
     var keys = new Map(Object.entries(patient.keywords));
     for (const [k, value] of keys.entries()) {
@@ -172,3 +182,6 @@ function filterKeywords() {
     }
 }
 
+function logout(){
+    window.location = "../portal/";
+}
