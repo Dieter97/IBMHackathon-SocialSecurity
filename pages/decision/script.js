@@ -7,8 +7,8 @@ $(document).ready(function() {
 });
 
 var patient;
-var debug = true;
-var server = "";
+var debug = false;
+var server = "https://ibm-hackaton-fodsz.x.rafvdl.be";
 
 function toggleLoader() {
     document.getElementById("loader").classList.toggle("hidden");
@@ -19,7 +19,7 @@ function loadPatientData() {
     toggleLoader();
     $.ajax({
         type: "GET",
-        url: "",
+        url: server+"/api/patient/9",
         dataType: "text",
         success: function(patientDATA){
 
@@ -161,14 +161,16 @@ function loadKeyValue(key) {
         }
     }
     document.getElementById("content").innerHTML = html;
-    var formData = new FormData();
-    formData.append("keyword",key);
+    data = {
+        "keyword" : key
+    };
     //Send click to DB
     $.ajax({
-        type: "GET",
+        type: "POST",
         url: server+"/api/patient/"+patient.id+"/click",
-        data: formData,
-        dataType: "text",
+        data: JSON.stringify(data),
+        contentType: "application/json",
+        dataType: "json",
         success: function(result) {
             //Nothing for now
         },
@@ -198,7 +200,7 @@ function filterKeywords() {
 }
 
 function logout(){
-    window.location = "../portal/";
+     $("#confirm-logout").modal("show");
 }
 
 function moreInfoNeeded() {
@@ -217,29 +219,44 @@ function moreInfoNeeded() {
 function submitDecision() {
     //Get the decision data
     var scores = Array();
-    scores.push({"catergory": "mobility","score" : parseInt(document.querySelector('input[name=mobility-point]:checked').value)});
-    scores.push({"catergory": "nutrition","score" : parseInt(document.querySelector('input[name=nutrition-point]:checked').value)});
-    scores.push({"catergory": "dressing","score" :parseInt(document.querySelector('input[name=dress-point]:checked').value)});
-    scores.push({"catergory": "household","score" : parseInt(document.querySelector('input[name=household-point]:checked').value)});
-    scores.push({"catergory": "risk_assessing","score" : parseInt(document.querySelector('input[name=risk-point]:checked').value)});
-    scores.push({"catergory": "communication","score" : parseInt(document.querySelector('input[name=comm-point]:checked').value)});
+    scores.push({"category": "mobility","score" : parseInt(document.querySelector('input[name=mobility-point]:checked').value)});
+    scores.push({"category": "nutrition","score" : parseInt(document.querySelector('input[name=nutrition-point]:checked').value)});
+    scores.push({"category": "dressing","score" :parseInt(document.querySelector('input[name=dress-point]:checked').value)});
+    scores.push({"category": "household","score" : parseInt(document.querySelector('input[name=household-point]:checked').value)});
+    scores.push({"category": "risk_assessing","score" : parseInt(document.querySelector('input[name=risk-point]:checked').value)});
+    scores.push({"category": "communication","score" : parseInt(document.querySelector('input[name=comm-point]:checked').value)});
 
     var data = {
-        "scores" : JSON.stringify(scores)
+        "score" : scores
     };
 
     console.log(JSON.stringify(data));
 
     $.ajax({
-        type: "GET",
+        type: "POST",
         url: server+"/api/patient/"+patient.id,
-        data: data,
-        dataType: "text",
-        success: function(result) {
-            //Nothing for now
+        data: JSON.stringify(data),
+        contentType: "application/json",
+        dataType: "json",
+        success: function(res) {
+            console.log(res);
+            var html = "";
+            res.predicted_motivation.forEach(function(mot){
+                html += '<tr><td><input type="radio" name="optradio" style="margin-left: 5px;"></td><td>'+mot+'</td></tr>';
+            });
+            html += '<tr class="radio">\n' +
+                '                        <td><input type="radio" name="optradio" style="margin-left: 5px;"></td>\n' +
+                '                        <td><input type="text" class="form-control" placeholder="Define your own motivation"></td>\n' +
+                '                    </tr>';
+            document.getElementById("motivation-list").innerHTML = html;
+
         },
         error: function(e) {
-            console.log("Error sending click: " + e);
-        },
+            console.log("Error receiving motivation: " + e.toString());
+        }
     });
+}
+
+function submitMotivation() {
+    $("#confirm-submit").modal("show");
 }
