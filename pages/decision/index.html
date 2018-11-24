@@ -25,14 +25,14 @@
     </div>
 </nav>
 
-<div id="loader" style="text-align: center;">
+<div id="loader" class="hidden" style="text-align: center;">
     Getting the next patient data...
     <div class="lds-hourglass"></div>
 </div>
 
-<div id="wrapper" class="hidden">
-    <div class="row" style="height: 50vh;">
-        <div id="patient-data" class="col-2 sidebar">
+<div id="wrapper">
+    <div class="row">
+        <div id="patient-data" class="col-2 sidebar" style="padding-top: 10px;">
             <div class="container-fluid">
                 <div class="card">
                     <div class="card-body" style="text-align: center;">
@@ -47,7 +47,7 @@
                 </div>
             </div>
             <div id="patient-demand" class="container-fluid" style="margin-top: 15px;">
-                <img src="../../img/question.svg" style="width: 50px;">
+                <img src="../../img/question.svg" style="width: 40px;">
                 <h4 style="display: inline;">Demand</h4>
                 <p style="margin-top: 10px;"><span id="demand">Mobility parking licence</span></p>
             </div>
@@ -134,7 +134,7 @@
                             </td>
                         </tr>
                     </table>
-                    <button class="btn btn-info float-right" style="margin-top: -30px;" data-toggle="modal" data-target="#motivationPopup">Submit</button>
+                    <button class="btn btn-info float-right" style="margin-top: -30px;" data-toggle="modal" data-target="#motivationPopup" onclick="submitDecision();">Submit</button>
                 </div>
             </div>
         </div>
@@ -156,7 +156,7 @@
                 <div class="col-6 float-left">
                     <h5>Keywords</h5>
                     <input type="text" onkeyup="filterKeywords();" class="form-control" id="keyword-search" placeholder="Search">
-                    <ul id="keyword-list" class="nopul" style="overflow-y: scroll;height: 310px;">
+                    <ul id="keyword-list" class="nopul" style="overflow-y: auto;height: 310px;">
                         <li class="list-group-item list-group-item-action">keyword 1</li>
                         <li class="list-group-item list-group-item-action">keyword 2</li>
                         <li class="list-group-item list-group-item-action">keyword 3</li>
@@ -174,7 +174,7 @@
 
 
 <!-- Modal -->
-<div class="modal fade" id="motivationPopup" role="dialog">
+<div class="modal fade" id="motivationPopup" role="dialog" data-backdrop="static" data-keyboard="false">
     <div class="modal-dialog">
         <!-- Modal content-->
         <div class="modal-content">
@@ -211,19 +211,18 @@
             </div>
             <div class="modal-body">
                 Select an action:
-                <select  class="form-control">
+                <select id="more-info-select" class="form-control">
                     <option value="interview">I want to invite the patient over for an interview</option>
                     <option value="incomplete">The evidence provided is not sufficient</option>
                 </select>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-success" data-dismiss="modal" onclick="">Submit</button>
+                <button type="button" class="btn btn-success" data-dismiss="modal" onclick="moreInfoNeeded();">Submit</button>
                 <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
             </div>
         </div>
     </div>
 </div>
-
 
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->

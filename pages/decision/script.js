@@ -4,14 +4,11 @@ $(document).ready(function() {
     //First load the patient data
     loadPatientData();
 
-
-
-    //Show page content and remove loader
-    setTimeout(function(){toggleLoader();},2000);
 });
 
 var patient;
 var debug = true;
+var server = "";
 
 function toggleLoader() {
     document.getElementById("loader").classList.toggle("hidden");
@@ -19,6 +16,7 @@ function toggleLoader() {
 }
 
 function loadPatientData() {
+    toggleLoader();
     $.ajax({
         type: "GET",
         url: "",
@@ -137,6 +135,9 @@ function loadPatientData() {
             }
             document.getElementById("keyword-list").innerHTML = html;
 
+            //Show page content and remove loader
+            setTimeout(function(){toggleLoader();},2000);
+
         },
         error: function(e){
             alert('Connection to backend failed! Error:' + e);
@@ -145,7 +146,6 @@ function loadPatientData() {
 }
 
 function loadKeyValue(key) {
-    //TODO LOG the click to the backend
     var html = "";
     var keys = new Map(Object.entries(patient.keywords));
     for (const [k, value] of keys.entries()) {
@@ -161,6 +161,21 @@ function loadKeyValue(key) {
         }
     }
     document.getElementById("content").innerHTML = html;
+    var formData = new FormData();
+    formData.append("keyword",key);
+    //Send click to DB
+    $.ajax({
+        type: "GET",
+        url: server+"/api/patient/"+patient.id+"/click",
+        data: formData,
+        dataType: "text",
+        success: function(result) {
+            //Nothing for now
+        },
+        error: function(e) {
+            console.log("Error sending click: " + e);
+        },
+    });
 }
 
 function filterKeywords() {
@@ -184,4 +199,47 @@ function filterKeywords() {
 
 function logout(){
     window.location = "../portal/";
+}
+
+function moreInfoNeeded() {
+    var option = document.getElementById("more-info-select").value;
+    switch (option){
+        case "interview":
+            break;
+        case "incomplete":
+            break;
+    }
+    loadPatientData();
+
+    console.log(option);
+}
+
+function submitDecision() {
+    //Get the decision data
+    var scores = Array();
+    scores.push({"catergory": "mobility","score" : parseInt(document.querySelector('input[name=mobility-point]:checked').value)});
+    scores.push({"catergory": "nutrition","score" : parseInt(document.querySelector('input[name=nutrition-point]:checked').value)});
+    scores.push({"catergory": "dressing","score" :parseInt(document.querySelector('input[name=dress-point]:checked').value)});
+    scores.push({"catergory": "household","score" : parseInt(document.querySelector('input[name=household-point]:checked').value)});
+    scores.push({"catergory": "risk_assessing","score" : parseInt(document.querySelector('input[name=risk-point]:checked').value)});
+    scores.push({"catergory": "communication","score" : parseInt(document.querySelector('input[name=comm-point]:checked').value)});
+
+    var data = {
+        "scores" : JSON.stringify(scores)
+    };
+
+    console.log(JSON.stringify(data));
+
+    $.ajax({
+        type: "GET",
+        url: server+"/api/patient/"+patient.id,
+        data: data,
+        dataType: "text",
+        success: function(result) {
+            //Nothing for now
+        },
+        error: function(e) {
+            console.log("Error sending click: " + e);
+        },
+    });
 }
